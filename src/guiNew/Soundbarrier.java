@@ -63,7 +63,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         tempImage = new BufferedImage(plDisplay.getWidth(), plDisplay.getHeight(), TYPE_INT_ARGB);
         g = tempImage.createGraphics();
        
-       jScrollPane1.getHorizontalScrollBar().setMaximum(3000-jScrollPane1.getWidth()/multiplicator);
+//       jScrollPane1.getHorizontalScrollBar().setMaximum(3000-jScrollPane1.getWidth()/multiplicator);
        jScrollPane1.getVerticalScrollBar().setMinimum(2283);
        jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             @Override
@@ -75,10 +75,8 @@ public class Soundbarrier extends javax.swing.JFrame {
        
        jScrollPane1.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             @Override
-            public void adjustmentValueChanged(AdjustmentEvent e) {
-                System.out.println(e.getValue());
-                System.out.println(jScrollPane1.getVerticalScrollBar().getMaximum());
-                System.out.println(jScrollPane1.getVerticalScrollBar().getMaximum()-jScrollPane1.getHeight());
+            public void adjustmentValueChanged(AdjustmentEvent e) 
+            {
                 redrawAll();
             }
         });
@@ -116,9 +114,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         plDisplay = new javax.swing.JPanel();
         mbMenue = new javax.swing.JMenuBar();
         muData = new javax.swing.JMenu();
+        miNew = new javax.swing.JMenuItem();
         miSave = new javax.swing.JMenuItem();
         miLoad = new javax.swing.JMenuItem();
-        miNew = new javax.swing.JMenuItem();
+        miEnd = new javax.swing.JMenuItem();
         muView = new javax.swing.JMenu();
         miHideTools = new javax.swing.JMenuItem();
         miShowTools = new javax.swing.JMenuItem();
@@ -153,6 +152,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbCreate.setText("Objekte erzeugen");
         lbCreate.setToolTipText("");
+        lbCreate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbCreate.setOpaque(true);
         lbCreate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -164,6 +164,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbSelect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbSelect.setText("Objekte Auswählen");
         lbSelect.setToolTipText("");
+        lbSelect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbSelect.setOpaque(true);
         lbSelect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -175,6 +176,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbModify.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbModify.setText("Auswahl bearbeiten");
         lbModify.setToolTipText("");
+        lbModify.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbModify.setOpaque(true);
         lbModify.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -185,6 +187,7 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         lbMove.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMove.setText("Auswahl bewegen");
+        lbMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbMove.setOpaque(true);
         lbMove.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -195,6 +198,7 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         lbDelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDelete.setText("Auswahl löschen");
+        lbDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbDelete.setOpaque(true);
         lbDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -205,6 +209,7 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         lbDefect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDefect.setText("Beschädigung vermerken");
+        lbDefect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbDefect.setOpaque(true);
         lbDefect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -215,6 +220,7 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         lbDuplicate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDuplicate.setText("Auswahl duplizieren");
+        lbDuplicate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbDuplicate.setOpaque(true);
         lbDuplicate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -290,6 +296,14 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         muData.setText("Datei");
 
+        miNew.setText("Neu");
+        miNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onMiNew(evt);
+            }
+        });
+        muData.add(miNew);
+
         miSave.setText("Speichern");
         miSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,13 +321,13 @@ public class Soundbarrier extends javax.swing.JFrame {
         });
         muData.add(miLoad);
 
-        miNew.setText("Neu");
-        miNew.addActionListener(new java.awt.event.ActionListener() {
+        miEnd.setText("Beenden");
+        miEnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onMiNewDisplay(evt);
+                onMeEnd(evt);
             }
         });
-        muData.add(miNew);
+        muData.add(miEnd);
 
         mbMenue.add(muData);
 
@@ -399,7 +413,20 @@ public class Soundbarrier extends javax.swing.JFrame {
         resetLabelBackground();
         lbDuplicate.setBackground(Color.gray);
         
-        duplicateSelected();
+        int anz = 0;
+        try
+        {
+            anz = Integer.parseInt(JOptionPane.showInputDialog(this, "Wie oft soll die Auswahl dupliziert werden?", "Eingabe", 1));
+            
+            for(int i = 0; i < anz; i++)
+                duplicateSelected();
+            redrawAll();
+        }
+        catch(Exception e)
+        {
+            
+        }
+        
     }//GEN-LAST:event_onClickDuplicate
 
     private void onClickDefect(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickDefect
@@ -552,9 +579,12 @@ public class Soundbarrier extends javax.swing.JFrame {
 
     private void onMouseWheelDisplay(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_onMouseWheelDisplay
         if(multiplicator+(evt.getUnitsToScroll())*-1 > 15)
+        {
             multiplicator+=evt.getUnitsToScroll()*-1;
+            redrawAll();
+        }
         
-        redrawAll();
+        
     }//GEN-LAST:event_onMouseWheelDisplay
 
     private void onResizedFrame(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_onResizedFrame
@@ -608,9 +638,13 @@ public class Soundbarrier extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_onMiLoad
 
-    private void onMiNewDisplay(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onMiNewDisplay
-        // TODO add your handling code here:
-    }//GEN-LAST:event_onMiNewDisplay
+    private void onMiNew(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onMiNew
+        selectedObjects.clear();
+        data.clear();
+        
+        redrawAll();
+        drawMargin();
+    }//GEN-LAST:event_onMiNew
 
     private void onMuViewDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_onMuViewDeselected
  
@@ -642,6 +676,11 @@ public class Soundbarrier extends javax.swing.JFrame {
         
         redrawAll();
     }//GEN-LAST:event_onShowTools
+
+    private void onMeEnd(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onMeEnd
+        save();
+        this.dispose();
+    }//GEN-LAST:event_onMeEnd
 
     private double calcPxToCoordsX(int xCoord)
     {
@@ -1428,40 +1467,40 @@ public class Soundbarrier extends javax.swing.JFrame {
     }
     
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Soundbarrier().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Soundbarrier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Soundbarrier().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
@@ -1473,6 +1512,7 @@ public class Soundbarrier extends javax.swing.JFrame {
     private javax.swing.JLabel lbMove;
     private javax.swing.JLabel lbSelect;
     private javax.swing.JMenuBar mbMenue;
+    private javax.swing.JMenuItem miEnd;
     private javax.swing.JMenuItem miHideTools;
     private javax.swing.JMenuItem miLoad;
     private javax.swing.JMenuItem miNew;
