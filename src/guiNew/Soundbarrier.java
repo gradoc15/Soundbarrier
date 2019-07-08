@@ -7,8 +7,11 @@ package guiNew;
 
 import data.Components;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import java.awt.image.RescaleOp;
@@ -52,10 +55,35 @@ public class Soundbarrier extends javax.swing.JFrame {
     public Soundbarrier() {
         initComponents();
         
+        this.setLocationRelativeTo(null);
         plDisplay.setBackground(Color.white);
         resetLabelBackground();
+        plDisplay.setSize(3000*multiplicator, 150*multiplicator);
+        plDisplay.setPreferredSize(new Dimension(3000*multiplicator, 150*multiplicator));
         tempImage = new BufferedImage(plDisplay.getWidth(), plDisplay.getHeight(), TYPE_INT_ARGB);
         g = tempImage.createGraphics();
+       
+       jScrollPane1.getHorizontalScrollBar().setMaximum(3000-jScrollPane1.getWidth()/multiplicator);
+       jScrollPane1.getVerticalScrollBar().setMinimum(2283);
+       jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) 
+            {
+                redrawAll();
+            }
+        });
+       
+       jScrollPane1.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                System.out.println(e.getValue());
+                System.out.println(jScrollPane1.getVerticalScrollBar().getMaximum());
+                System.out.println(jScrollPane1.getVerticalScrollBar().getMaximum()-jScrollPane1.getHeight());
+                redrawAll();
+            }
+        });
+        
+ 
     }
 
     @Override
@@ -63,6 +91,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         super.paint(g); 
         
         System.out.println("asd");
+        redrawAll();
     }
     
     
@@ -80,7 +109,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbDefect = new javax.swing.JLabel();
         lbDuplicate = new javax.swing.JLabel();
         plDisplayPane = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        plSouth = new javax.swing.JPanel();
+        plNorth = new javax.swing.JPanel();
+        plCenter = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         plDisplay = new javax.swing.JPanel();
         mbMenue = new javax.swing.JMenuBar();
         muData = new javax.swing.JMenu();
@@ -88,10 +120,9 @@ public class Soundbarrier extends javax.swing.JFrame {
         miLoad = new javax.swing.JMenuItem();
         miNew = new javax.swing.JMenuItem();
         muView = new javax.swing.JMenu();
+        miHideTools = new javax.swing.JMenuItem();
+        miShowTools = new javax.swing.JMenuItem();
         muEdit = new javax.swing.JMenu();
-        miChangeSector = new javax.swing.JMenuItem();
-        miDelSector = new javax.swing.JMenuItem();
-        miCopySector = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 800));
@@ -195,7 +226,18 @@ public class Soundbarrier extends javax.swing.JFrame {
         getContentPane().add(plToolbox, java.awt.BorderLayout.LINE_END);
 
         plDisplayPane.setLayout(new java.awt.BorderLayout());
-        plDisplayPane.add(jPanel3, java.awt.BorderLayout.PAGE_END);
+
+        plSouth.setLayout(new java.awt.GridLayout(1, 1));
+        plDisplayPane.add(plSouth, java.awt.BorderLayout.PAGE_END);
+
+        plNorth.setLayout(new java.awt.BorderLayout());
+        plDisplayPane.add(plNorth, java.awt.BorderLayout.LINE_END);
+
+        plCenter.setLayout(new java.awt.GridLayout(1, 1));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setToolTipText("");
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         plDisplay.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -226,26 +268,27 @@ public class Soundbarrier extends javax.swing.JFrame {
                 onDisplayResized(evt);
             }
         });
-        plDisplayPane.add(plDisplay, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout plDisplayLayout = new javax.swing.GroupLayout(plDisplay);
+        plDisplay.setLayout(plDisplayLayout);
+        plDisplayLayout.setHorizontalGroup(
+            plDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 252, Short.MAX_VALUE)
+        );
+        plDisplayLayout.setVerticalGroup(
+            plDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(plDisplay);
+
+        plCenter.add(jScrollPane1);
+
+        plDisplayPane.add(plCenter, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(plDisplayPane, java.awt.BorderLayout.CENTER);
 
         muData.setText("Datei");
-        muData.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-                onCancl(evt);
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-                onDS(evt);
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-            }
-        });
-        muData.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                onPropC(evt);
-            }
-        });
 
         miSave.setText("Speichern");
         miSave.addActionListener(new java.awt.event.ActionListener() {
@@ -284,6 +327,23 @@ public class Soundbarrier extends javax.swing.JFrame {
             public void menuSelected(javax.swing.event.MenuEvent evt) {
             }
         });
+
+        miHideTools.setText("Werzeuge verstecken");
+        miHideTools.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onHideTools(evt);
+            }
+        });
+        muView.add(miHideTools);
+
+        miShowTools.setText("Werzeuge anzeigen");
+        miShowTools.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onShowTools(evt);
+            }
+        });
+        muView.add(miShowTools);
+
         mbMenue.add(muView);
 
         muEdit.setText("Edit");
@@ -296,31 +356,6 @@ public class Soundbarrier extends javax.swing.JFrame {
             public void menuSelected(javax.swing.event.MenuEvent evt) {
             }
         });
-
-        miChangeSector.setText("Sektor Ändern");
-        miChangeSector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onMiChangeSector(evt);
-            }
-        });
-        muEdit.add(miChangeSector);
-
-        miDelSector.setText("Sektor Löschen");
-        miDelSector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onMiDelSector(evt);
-            }
-        });
-        muEdit.add(miDelSector);
-
-        miCopySector.setText("Sektor kopieren");
-        miCopySector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onMiCopySector(evt);
-            }
-        });
-        muEdit.add(miCopySector);
-
         mbMenue.add(muEdit);
 
         setJMenuBar(mbMenue);
@@ -516,13 +551,14 @@ public class Soundbarrier extends javax.swing.JFrame {
     }//GEN-LAST:event_onReleasedDisplay
 
     private void onMouseWheelDisplay(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_onMouseWheelDisplay
-        if(multiplicator+(evt.getUnitsToScroll())*-1 > 0)
+        if(multiplicator+(evt.getUnitsToScroll())*-1 > 15)
             multiplicator+=evt.getUnitsToScroll()*-1;
         
         redrawAll();
     }//GEN-LAST:event_onMouseWheelDisplay
 
     private void onResizedFrame(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_onResizedFrame
+        repaint();
         tempImage = new BufferedImage(plDisplay.getWidth(), plDisplay.getHeight(), TYPE_INT_ARGB);
         g = tempImage.createGraphics();
         redrawAll();
@@ -576,42 +612,36 @@ public class Soundbarrier extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_onMiNewDisplay
 
-    private void onMiChangeSector(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onMiChangeSector
-        // TODO add your handling code here:
-    }//GEN-LAST:event_onMiChangeSector
-
-    private void onMiDelSector(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onMiDelSector
-        // TODO add your handling code here:
-    }//GEN-LAST:event_onMiDelSector
-
-    private void onMiCopySector(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onMiCopySector
-        // TODO add your handling code here:
-    }//GEN-LAST:event_onMiCopySector
-
     private void onMuViewDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_onMuViewDeselected
-        redrawAll();
+ 
     }//GEN-LAST:event_onMuViewDeselected
 
     private void onMuEditDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_onMuEditDeselected
-//        redrawAll();
+
     }//GEN-LAST:event_onMuEditDeselected
 
     private void onEnteredDisplay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onEnteredDisplay
 
     }//GEN-LAST:event_onEnteredDisplay
 
-    private void onPropC(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_onPropC
-        System.out.println("PropC");
-    }//GEN-LAST:event_onPropC
+    private void onHideTools(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onHideTools
 
-    private void onCancl(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_onCancl
+        plToolbox.setVisible(false);
+        
+        tempImage = new BufferedImage(plDisplay.getWidth()+plToolbox.getWidth(), plDisplay.getHeight(), TYPE_INT_ARGB);
+        g = tempImage.createGraphics();
+        
+        redrawAll();
+    }//GEN-LAST:event_onHideTools
 
-    }//GEN-LAST:event_onCancl
-
-    private void onDS(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_onDS
-        System.out.println("DS");
-        //tempImage.
-    }//GEN-LAST:event_onDS
+    private void onShowTools(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onShowTools
+        plToolbox.setVisible(true);
+        
+        tempImage = new BufferedImage(plDisplay.getWidth()-plToolbox.getWidth(), plDisplay.getHeight(), TYPE_INT_ARGB);
+        g = tempImage.createGraphics();
+        
+        redrawAll();
+    }//GEN-LAST:event_onShowTools
 
     private double calcPxToCoordsX(int xCoord)
     {
@@ -1434,7 +1464,7 @@ public class Soundbarrier extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCreate;
     private javax.swing.JLabel lbDefect;
     private javax.swing.JLabel lbDelete;
@@ -1443,18 +1473,20 @@ public class Soundbarrier extends javax.swing.JFrame {
     private javax.swing.JLabel lbMove;
     private javax.swing.JLabel lbSelect;
     private javax.swing.JMenuBar mbMenue;
-    private javax.swing.JMenuItem miChangeSector;
-    private javax.swing.JMenuItem miCopySector;
-    private javax.swing.JMenuItem miDelSector;
+    private javax.swing.JMenuItem miHideTools;
     private javax.swing.JMenuItem miLoad;
     private javax.swing.JMenuItem miNew;
     private javax.swing.JMenuItem miSave;
+    private javax.swing.JMenuItem miShowTools;
     private javax.swing.JMenu muData;
     private javax.swing.JMenu muEdit;
     private javax.swing.JMenu muView;
+    private javax.swing.JPanel plCenter;
     private javax.swing.JPanel plDisplay;
     private javax.swing.JPanel plDisplayPane;
     private javax.swing.JPanel plMenuebar;
+    private javax.swing.JPanel plNorth;
+    private javax.swing.JPanel plSouth;
     private javax.swing.JPanel plToolbox;
     // End of variables declaration//GEN-END:variables
 }
