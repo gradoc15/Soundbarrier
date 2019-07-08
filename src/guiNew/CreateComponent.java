@@ -108,7 +108,7 @@ public class CreateComponent extends javax.swing.JDialog {
         panel = new JPanel();
         panel.setLayout(new GridLayout(rows, cols));
         
-        JLabel lbPrimaryComp = new JLabel("Hauptkompnente");
+        JLabel lbPrimaryComp = new JLabel("Hauptkomponente");
         lbPrimaryComp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panel.add(lbPrimaryComp);
         

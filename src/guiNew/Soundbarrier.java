@@ -12,10 +12,16 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import java.awt.image.RescaleOp;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import parts.Selektor;
 
 /**
@@ -68,7 +74,8 @@ public class Soundbarrier extends javax.swing.JFrame {
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         plMenuebar = new javax.swing.JPanel();
         plToolbox = new javax.swing.JPanel();
@@ -87,6 +94,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         miSave = new javax.swing.JMenuItem();
         miLoad = new javax.swing.JMenuItem();
         miNew = new javax.swing.JMenuItem();
+        miImport = new javax.swing.JMenuItem();
         muView = new javax.swing.JMenu();
         muEdit = new javax.swing.JMenu();
         miChangeSector = new javax.swing.JMenuItem();
@@ -95,19 +103,25 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 800));
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentMoved(java.awt.event.ComponentEvent evt)
+            {
                 onMovedFrame(evt);
             }
-            public void componentResized(java.awt.event.ComponentEvent evt) {
+            public void componentResized(java.awt.event.ComponentEvent evt)
+            {
                 onResizedFrame(evt);
             }
         });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
                 onClosingFrame(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 onOpenedFrame(evt);
             }
         });
@@ -123,8 +137,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbCreate.setText("Objekte erzeugen");
         lbCreate.setToolTipText("");
         lbCreate.setOpaque(true);
-        lbCreate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbCreate.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickNew(evt);
             }
         });
@@ -134,8 +150,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbSelect.setText("Objekte Auswählen");
         lbSelect.setToolTipText("");
         lbSelect.setOpaque(true);
-        lbSelect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbSelect.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickSelect(evt);
             }
         });
@@ -145,8 +163,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbModify.setText("Auswahl bearbeiten");
         lbModify.setToolTipText("");
         lbModify.setOpaque(true);
-        lbModify.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbModify.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickModify(evt);
             }
         });
@@ -155,8 +175,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbMove.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMove.setText("Auswahl bewegen");
         lbMove.setOpaque(true);
-        lbMove.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbMove.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickMove(evt);
             }
         });
@@ -165,8 +187,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbDelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDelete.setText("Auswahl löschen");
         lbDelete.setOpaque(true);
-        lbDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbDelete.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickDelete(evt);
             }
         });
@@ -175,8 +199,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbDefect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDefect.setText("Beschädigung vermerken");
         lbDefect.setOpaque(true);
-        lbDefect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbDefect.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickDefect(evt);
             }
         });
@@ -185,8 +211,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         lbDuplicate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDuplicate.setText("Auswahl duplizieren");
         lbDuplicate.setOpaque(true);
-        lbDuplicate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lbDuplicate.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickDuplicate(evt);
             }
         });
@@ -197,32 +225,43 @@ public class Soundbarrier extends javax.swing.JFrame {
         plDisplayPane.setLayout(new java.awt.BorderLayout());
         plDisplayPane.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        plDisplay.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
+        plDisplay.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseDragged(java.awt.event.MouseEvent evt)
+            {
                 onDraggedDisplay(evt);
             }
         });
-        plDisplay.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+        plDisplay.addMouseWheelListener(new java.awt.event.MouseWheelListener()
+        {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt)
+            {
                 onMouseWheelDisplay(evt);
             }
         });
-        plDisplay.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        plDisplay.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 onClickDisplay(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
                 onEnteredDisplay(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 onPressedDisplay(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 onReleasedDisplay(evt);
             }
         });
-        plDisplay.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
+        plDisplay.addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentResized(java.awt.event.ComponentEvent evt)
+            {
                 onDisplayResized(evt);
             }
         });
@@ -231,25 +270,33 @@ public class Soundbarrier extends javax.swing.JFrame {
         getContentPane().add(plDisplayPane, java.awt.BorderLayout.CENTER);
 
         muData.setText("Datei");
-        muData.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        muData.addMenuListener(new javax.swing.event.MenuListener()
+        {
+            public void menuCanceled(javax.swing.event.MenuEvent evt)
+            {
                 onCancl(evt);
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            public void menuDeselected(javax.swing.event.MenuEvent evt)
+            {
                 onDS(evt);
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt)
+            {
             }
         });
-        muData.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+        muData.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
                 onPropC(evt);
             }
         });
 
         miSave.setText("Speichern");
-        miSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 onMiSave(evt);
             }
         });
@@ -257,65 +304,93 @@ public class Soundbarrier extends javax.swing.JFrame {
 
         miLoad.setText("Laden");
         miLoad.setToolTipText("");
-        miLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miLoad.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 onMiLoad(evt);
             }
         });
         muData.add(miLoad);
 
         miNew.setText("Neu");
-        miNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miNew.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 onMiNewDisplay(evt);
             }
         });
         muData.add(miNew);
 
+        miImport.setText("Lärmschutzwände importieren");
+        miImport.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                onMiImport(evt);
+            }
+        });
+        muData.add(miImport);
+
         mbMenue.add(muData);
 
         muView.setText("Ansicht");
-        muView.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        muView.addMenuListener(new javax.swing.event.MenuListener()
+        {
+            public void menuCanceled(javax.swing.event.MenuEvent evt)
+            {
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            public void menuDeselected(javax.swing.event.MenuEvent evt)
+            {
                 onMuViewDeselected(evt);
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt)
+            {
             }
         });
         mbMenue.add(muView);
 
         muEdit.setText("Edit");
-        muEdit.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        muEdit.addMenuListener(new javax.swing.event.MenuListener()
+        {
+            public void menuCanceled(javax.swing.event.MenuEvent evt)
+            {
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            public void menuDeselected(javax.swing.event.MenuEvent evt)
+            {
                 onMuEditDeselected(evt);
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt)
+            {
             }
         });
 
         miChangeSector.setText("Sektor Ändern");
-        miChangeSector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miChangeSector.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 onMiChangeSector(evt);
             }
         });
         muEdit.add(miChangeSector);
 
         miDelSector.setText("Sektor Löschen");
-        miDelSector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miDelSector.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 onMiDelSector(evt);
             }
         });
         muEdit.add(miDelSector);
 
         miCopySector.setText("Sektor kopieren");
-        miCopySector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        miCopySector.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 onMiCopySector(evt);
             }
         });
@@ -612,6 +687,34 @@ public class Soundbarrier extends javax.swing.JFrame {
         System.out.println("DS");
         //tempImage.
     }//GEN-LAST:event_onDS
+
+    private void onMiImport(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onMiImport
+    {//GEN-HEADEREND:event_onMiImport
+        try{
+            JFileChooser chooser = new JFileChooser();
+            FileFilter filter = new FileNameExtensionFilter("Only .csv", "csv");
+            chooser.setAcceptAllFileFilterUsed(true);
+            chooser.setFileFilter(filter);
+            int ret = chooser.showOpenDialog(null);
+            if(ret == JFileChooser.APPROVE_OPTION)
+            {
+                File csvdat = chooser.getSelectedFile();
+                if(csvdat.isFile())
+                {
+                    db.Database database = db.Database.getInstance();
+                    database.importFile(csvdat);
+                }
+            }
+        }catch(FileNotFoundException fnfex){
+            fnfex.printStackTrace();
+        }catch(IOException ioex){
+            ioex.printStackTrace();
+        }catch(IllegalStateException istex){
+            JOptionPane.showMessageDialog(null, istex.getMessage(),"Ungültige CSV Datei ausgewählt.", JOptionPane.INFORMATION_MESSAGE);
+        }catch(SQLException sqlex){
+            sqlex.printStackTrace();
+        }
+    }//GEN-LAST:event_onMiImport
 
     private double calcPxToCoordsX(int xCoord)
     {
@@ -1446,6 +1549,7 @@ public class Soundbarrier extends javax.swing.JFrame {
     private javax.swing.JMenuItem miChangeSector;
     private javax.swing.JMenuItem miCopySector;
     private javax.swing.JMenuItem miDelSector;
+    private javax.swing.JMenuItem miImport;
     private javax.swing.JMenuItem miLoad;
     private javax.swing.JMenuItem miNew;
     private javax.swing.JMenuItem miSave;
