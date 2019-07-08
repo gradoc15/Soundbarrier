@@ -8,6 +8,7 @@ package guiNew;
 import data.Components;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.AdjustmentEvent;
@@ -32,8 +33,8 @@ public class Soundbarrier extends javax.swing.JFrame {
     
     //Design Vars
     private int multiplicator = 20;
-    private int border = 5;
-    private int defRad = 30;
+    private final int border = 5;
+    private final int defRad = 30;
     
     //Data vars
     private int mode = 0;
@@ -45,7 +46,6 @@ public class Soundbarrier extends javax.swing.JFrame {
     //Vars for draggign
     private boolean dragAble = false;
     private parts.Selektor selektor;
-    private parts.Selektor defectText;
     private LinkedList<Double> oldX = new LinkedList();
     private LinkedList<Double> oldY = new LinkedList();
     private double oldXMouse;
@@ -58,14 +58,15 @@ public class Soundbarrier extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         plDisplay.setBackground(Color.white);
         resetLabelBackground();
-        plDisplay.setSize(3000*multiplicator, 150*multiplicator);
-        plDisplay.setPreferredSize(new Dimension(3000*multiplicator, 150*multiplicator));
+        plDisplay.setSize(3001*multiplicator, 76*multiplicator);
+        plDisplay.setPreferredSize(new Dimension(3001*multiplicator, 76*multiplicator));
         tempImage = new BufferedImage(plDisplay.getWidth(), plDisplay.getHeight(), TYPE_INT_ARGB);
         g = tempImage.createGraphics();
+        g.setFont(new Font("Monospaced", g.getFont().getStyle(), g.getFont().getSize()));
        
 //       jScrollPane1.getHorizontalScrollBar().setMaximum(3000-jScrollPane1.getWidth()/multiplicator);
-       jScrollPane1.getVerticalScrollBar().setMinimum(2283);
-       jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+        jScrollPane1.getVerticalScrollBar().setMinimum(2283);
+        jScrollPane1.getHorizontalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             @Override
             public void adjustmentValueChanged(AdjustmentEvent e) 
             {
@@ -93,6 +94,7 @@ public class Soundbarrier extends javax.swing.JFrame {
     }
     
     
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -100,12 +102,12 @@ public class Soundbarrier extends javax.swing.JFrame {
         plMenuebar = new javax.swing.JPanel();
         plToolbox = new javax.swing.JPanel();
         lbCreate = new javax.swing.JLabel();
-        lbSelect = new javax.swing.JLabel();
+        lbDefect = new javax.swing.JLabel();
         lbModify = new javax.swing.JLabel();
+        lbSelect = new javax.swing.JLabel();
+        lbDuplicate = new javax.swing.JLabel();
         lbMove = new javax.swing.JLabel();
         lbDelete = new javax.swing.JLabel();
-        lbDefect = new javax.swing.JLabel();
-        lbDuplicate = new javax.swing.JLabel();
         plDisplayPane = new javax.swing.JPanel();
         plSouth = new javax.swing.JPanel();
         plNorth = new javax.swing.JPanel();
@@ -146,11 +148,11 @@ public class Soundbarrier extends javax.swing.JFrame {
         getContentPane().add(plMenuebar, java.awt.BorderLayout.PAGE_START);
 
         plToolbox.setMinimumSize(new java.awt.Dimension(130, 105));
-        plToolbox.setPreferredSize(new java.awt.Dimension(130, 105));
+        plToolbox.setPreferredSize(new java.awt.Dimension(105, 105));
         plToolbox.setLayout(new java.awt.GridLayout(7, 0));
 
         lbCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbCreate.setText("Objekte erzeugen");
+        lbCreate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconAdd.png"))); // NOI18N
         lbCreate.setToolTipText("");
         lbCreate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbCreate.setOpaque(true);
@@ -161,20 +163,19 @@ public class Soundbarrier extends javax.swing.JFrame {
         });
         plToolbox.add(lbCreate);
 
-        lbSelect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbSelect.setText("Objekte Auswählen");
-        lbSelect.setToolTipText("");
-        lbSelect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lbSelect.setOpaque(true);
-        lbSelect.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbDefect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDefect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconDefect.png"))); // NOI18N
+        lbDefect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbDefect.setOpaque(true);
+        lbDefect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                onClickSelect(evt);
+                onClickDefect(evt);
             }
         });
-        plToolbox.add(lbSelect);
+        plToolbox.add(lbDefect);
 
         lbModify.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbModify.setText("Auswahl bearbeiten");
+        lbModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconModify.png"))); // NOI18N
         lbModify.setToolTipText("");
         lbModify.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbModify.setOpaque(true);
@@ -185,8 +186,31 @@ public class Soundbarrier extends javax.swing.JFrame {
         });
         plToolbox.add(lbModify);
 
+        lbSelect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconSelect.png"))); // NOI18N
+        lbSelect.setToolTipText("");
+        lbSelect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbSelect.setOpaque(true);
+        lbSelect.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                onClickSelect(evt);
+            }
+        });
+        plToolbox.add(lbSelect);
+
+        lbDuplicate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDuplicate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconDuplicate.png"))); // NOI18N
+        lbDuplicate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lbDuplicate.setOpaque(true);
+        lbDuplicate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                onClickDuplicate(evt);
+            }
+        });
+        plToolbox.add(lbDuplicate);
+
         lbMove.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMove.setText("Auswahl bewegen");
+        lbMove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconMove.png"))); // NOI18N
         lbMove.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbMove.setOpaque(true);
         lbMove.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -197,7 +221,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         plToolbox.add(lbMove);
 
         lbDelete.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbDelete.setText("Auswahl löschen");
+        lbDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconDelete.png"))); // NOI18N
         lbDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lbDelete.setOpaque(true);
         lbDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,28 +230,6 @@ public class Soundbarrier extends javax.swing.JFrame {
             }
         });
         plToolbox.add(lbDelete);
-
-        lbDefect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbDefect.setText("Beschädigung vermerken");
-        lbDefect.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lbDefect.setOpaque(true);
-        lbDefect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                onClickDefect(evt);
-            }
-        });
-        plToolbox.add(lbDefect);
-
-        lbDuplicate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbDuplicate.setText("Auswahl duplizieren");
-        lbDuplicate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        lbDuplicate.setOpaque(true);
-        lbDuplicate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                onClickDuplicate(evt);
-            }
-        });
-        plToolbox.add(lbDuplicate);
 
         getContentPane().add(plToolbox, java.awt.BorderLayout.LINE_END);
 
@@ -269,9 +271,9 @@ public class Soundbarrier extends javax.swing.JFrame {
                 onReleasedDisplay(evt);
             }
         });
-        plDisplay.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                onDisplayResized(evt);
+        plDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                onKeyPressedDisplay(evt);
             }
         });
 
@@ -279,7 +281,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         plDisplay.setLayout(plDisplayLayout);
         plDisplayLayout.setHorizontalGroup(
             plDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGap(0, 282, Short.MAX_VALUE)
         );
         plDisplayLayout.setVerticalGroup(
             plDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,39 +381,39 @@ public class Soundbarrier extends javax.swing.JFrame {
 
     private void resetLabelBackground()
     {
-        lbCreate.setBackground(Color.lightGray);
-        lbDefect.setBackground(Color.lightGray);
-        lbDelete.setBackground(Color.lightGray);
-        lbDuplicate.setBackground(Color.lightGray);
-        lbModify.setBackground(Color.lightGray);
-        lbMove.setBackground(Color.lightGray);
-        lbSelect.setBackground(Color.lightGray);
+        lbCreate.setBackground(Color.white);
+        lbDefect.setBackground(Color.white);
+        lbDelete.setBackground(Color.white);
+        lbDuplicate.setBackground(Color.white);
+        lbModify.setBackground(Color.white);
+        lbMove.setBackground(Color.white);
+        lbSelect.setBackground(Color.white);
     }
     
     private void onClickNew(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickNew
         resetLabelBackground();
-        lbCreate.setBackground(Color.gray);
+        lbCreate.setBackground(Color.lightGray);
         
         mode = 1;
     }//GEN-LAST:event_onClickNew
 
     private void onClickSelect(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickSelect
         resetLabelBackground();
-        lbSelect.setBackground(Color.gray);
+        lbSelect.setBackground(Color.lightGray);
         
         mode = 6;
     }//GEN-LAST:event_onClickSelect
 
     private void onClickModify(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickModify
         resetLabelBackground();
-        lbModify.setBackground(Color.gray);
+        lbModify.setBackground(Color.lightGray);
         
         mode = 5;
     }//GEN-LAST:event_onClickModify
 
     private void onClickDuplicate(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickDuplicate
         resetLabelBackground();
-        lbDuplicate.setBackground(Color.gray);
+        lbDuplicate.setBackground(Color.lightGray);
         
         int anz = 0;
         try
@@ -431,28 +433,24 @@ public class Soundbarrier extends javax.swing.JFrame {
 
     private void onClickDefect(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickDefect
         resetLabelBackground();
-        lbDefect.setBackground(Color.gray);
+        lbDefect.setBackground(Color.lightGray);
         
         mode = 3;
     }//GEN-LAST:event_onClickDefect
 
     private void onClickDelete(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickDelete
         resetLabelBackground();
-        lbDelete.setBackground(Color.gray);
+        lbDelete.setBackground(Color.lightGray);
         
         mode = 2;
     }//GEN-LAST:event_onClickDelete
 
     private void onClickMove(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickMove
         resetLabelBackground();
-        lbMove.setBackground(Color.gray);
+        lbMove.setBackground(Color.lightGray);
         
         mode = 4;
     }//GEN-LAST:event_onClickMove
-
-    private void onDisplayResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_onDisplayResized
-        redrawAll();
-    }//GEN-LAST:event_onDisplayResized
 
     private void onClickDisplay(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onClickDisplay
         System.out.println("ClickedDisplay");
@@ -578,7 +576,7 @@ public class Soundbarrier extends javax.swing.JFrame {
     }//GEN-LAST:event_onReleasedDisplay
 
     private void onMouseWheelDisplay(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_onMouseWheelDisplay
-        if(multiplicator+(evt.getUnitsToScroll())*-1 > 15)
+        if(multiplicator+(evt.getUnitsToScroll())*-1 > 12)
         {
             multiplicator+=evt.getUnitsToScroll()*-1;
             redrawAll();
@@ -681,6 +679,10 @@ public class Soundbarrier extends javax.swing.JFrame {
         save();
         this.dispose();
     }//GEN-LAST:event_onMeEnd
+
+    private void onKeyPressedDisplay(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_onKeyPressedDisplay
+        System.out.println(evt.getKeyChar());
+    }//GEN-LAST:event_onKeyPressedDisplay
 
     private double calcPxToCoordsX(int xCoord)
     {
@@ -1104,10 +1106,12 @@ public class Soundbarrier extends javax.swing.JFrame {
     
     private void redrawAll()
     {
+       
         
         g.setColor(Color.white);
         g.fillRect(0, 0, plDisplay.getWidth(), plDisplay.getWidth());
         
+        drawMargin();
         plToolbox.repaint();
         
         for(parts.WallComponent com: data)
@@ -1149,8 +1153,8 @@ public class Soundbarrier extends javax.swing.JFrame {
                 
          
                  g.setColor(Color.black);
-                 g.drawString("b: " + ((parts.Barrier) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 10, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator) + 17);
-                 g.drawString("h: " + ((parts.Barrier) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator) + 10, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator) + 32);
+                 g.drawString("b: " + ((parts.Barrier) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoehe()*multiplicator)- 6);
+                 g.drawString("h: " + ((parts.Barrier) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoehe()*multiplicator)- 20 );
                  
 
              } 
@@ -1195,8 +1199,9 @@ public class Soundbarrier extends javax.swing.JFrame {
                      
                     
                      g.setColor(Color.black);
-                     g.drawString("b: " + ((parts.Barrier) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 10, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator) + (int) (((parts.Barrier) comp).getHoehe() * multiplicator) - (int) (((parts.Barrier) comp).getHoeheR() * multiplicator) + 17);
-                     g.drawString("h: " + ((parts.Barrier) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator)+10, (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator)+(int)(((parts.Barrier)comp).getHoehe()*multiplicator)-(int)(((parts.Barrier)comp).getHoeheR()*multiplicator)+32);
+                     g.drawString("b:  " + ((parts.Barrier) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoehe()*multiplicator)- 6);
+                     g.drawString("hR: " + ((parts.Barrier) comp).getHoeheR() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoehe()*multiplicator)- 20 );
+                     g.drawString("hL: " + ((parts.Barrier) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoehe()*multiplicator)- 34 );
 
                     }
                     else
@@ -1233,8 +1238,9 @@ public class Soundbarrier extends javax.swing.JFrame {
                         g.drawLine((int) (comp.getPosX() * multiplicator) + 1, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator) + (int) (((parts.Barrier) comp).getHoeheR() * multiplicator) - (int) (((parts.Barrier) comp).getHoeheL() * multiplicator), (int) (comp.getPosX() * multiplicator) + (int) (((parts.Barrier) comp).getBreite() * multiplicator) - 1, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator) + (int) (((parts.Barrier) comp).getHoeheR() * multiplicator) - (int) (((parts.Barrier) comp).getHoeheL() * multiplicator));
 
                         g.setColor(Color.black);
-                        g.drawString("b: " + ((parts.Barrier) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 10, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator) + (int) (((parts.Barrier) comp).getHoeheR() * multiplicator) - (int) (((parts.Barrier) comp).getHoeheL() * multiplicator) + 17);
-                        g.drawString("h: " + ((parts.Barrier) comp).getHoeheR() + "m", (int) (comp.getPosX() * multiplicator)+10, (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator)+(int)(((parts.Barrier)comp).getHoeheR()*multiplicator)-(int)(((parts.Barrier)comp).getHoeheL()*multiplicator)+32);
+                        g.drawString("b:  " + ((parts.Barrier) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoeheR()*multiplicator)- 6);
+                        g.drawString("hR: " + ((parts.Barrier) comp).getHoeheR() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoeheR()*multiplicator)- 20 );
+                        g.drawString("hL: " + ((parts.Barrier) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Barrier)comp).getHoeheR()*multiplicator)- 34 );
 
                     }
 
@@ -1250,8 +1256,8 @@ public class Soundbarrier extends javax.swing.JFrame {
              g.fillRect((int)(comp.getPosX()*multiplicator), (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator), (int)(((parts.Foundation)comp).getBreite()*multiplicator), (int)(((parts.Foundation)comp).getHoehe()*multiplicator));
              g.setColor(Color.black);
              g.drawRect((int)(comp.getPosX()*multiplicator), (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator), (int)(((parts.Foundation)comp).getBreite()*multiplicator), (int)(((parts.Foundation)comp).getHoehe()*multiplicator));
-             g.drawString("b: "+((parts.Foundation)comp).getBreite()+"m", (int)(comp.getPosX()*multiplicator)+10, (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator)+17);
-             g.drawString("h: "+((parts.Foundation)comp).getHoehe()+"m", (int)(comp.getPosX()*multiplicator)+10, (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator)+32);
+             g.drawString("b: " + ((parts.Foundation) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Foundation)comp).getHoehe()*multiplicator)- 6);
+             g.drawString("h: " + ((parts.Foundation) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Foundation)comp).getHoehe()*multiplicator)- 20 );
          }
          else if(comp instanceof parts.Door)
          {
@@ -1260,8 +1266,8 @@ public class Soundbarrier extends javax.swing.JFrame {
              g.fillRect((int)(comp.getPosX()*multiplicator), (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator), (int)(((parts.Door)comp).getBreite()*multiplicator), (int)(((parts.Door)comp).getHoehe()*multiplicator));
              g.setColor(Color.black);
              g.drawRect((int)(comp.getPosX()*multiplicator), (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator), (int)(((parts.Door)comp).getBreite()*multiplicator), (int)(((parts.Door)comp).getHoehe()*multiplicator));
-             g.drawString("b: "+((parts.Door)comp).getBreite()+"m", (int)(comp.getPosX()*multiplicator)+10, (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator)+17);
-             g.drawString("h: "+((parts.Door)comp).getHoehe()+"m", (int)(comp.getPosX()*multiplicator)+10, (int)(plDisplay.getHeight()-comp.getPosY()*multiplicator)+32); 
+             g.drawString("b: " + ((parts.Door) comp).getBreite() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Door)comp).getHoehe()*multiplicator)- 6);
+             g.drawString("h: " + ((parts.Door) comp).getHoehe() + "m", (int) (comp.getPosX() * multiplicator) + 5, (int) (plDisplay.getHeight() - comp.getPosY() * multiplicator + ((parts.Door)comp).getHoehe()*multiplicator)- 20 );
          }
          else if(comp instanceof parts.Defect)
          {
@@ -1411,8 +1417,6 @@ public class Soundbarrier extends javax.swing.JFrame {
     
     private void updateDisplay()
     {
-        drawMargin();
-        
         Graphics2D g2 = (Graphics2D)plDisplay.getGraphics();
         float[] scales = { 1f, 1f, 1f, 0.5f };
         float[] offsets = new float[4];

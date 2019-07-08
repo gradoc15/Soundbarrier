@@ -36,5 +36,8 @@ public class main
         
         guiNew.Soundbarrier g = new guiNew.Soundbarrier();
         g.setVisible(true);
+//        
+//        gui.SoundBarrierGui g2 = new gui.SoundBarrierGui();
+//        g2.setVisible(true);
     }
 }
