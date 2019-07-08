@@ -1,0 +1,64 @@
+DROP TABLE barrier;
+DROP TABLE foundation;
+DROP TABLE defect;
+DROP TABLE door;
+DROP TABLE sector;
+
+CREATE TABLE sector
+(
+	SectorID INTEGER PRIMARY KEY
+);
+
+CREATE TABLE barrier
+(
+	BarrierID INTEGER PRIMARY KEY,
+	SectorID INTEGER,
+	PosX NUMERIC,
+	PosY NUMERIC,
+	HoeheL NUMERIC,
+	HoeheR NUMERIC,
+	Breite NUMERIC,
+	Material VARCHAR
+);
+
+CREATE TABLE foundation
+(
+	FoundationID INTEGER PRIMARY KEY,
+	SectorID INTEGER,
+	PosX NUMERIC,
+	PosY NUMERIC,
+	Hoehe NUMERIC,
+	Breite NUMERIC
+);
+
+CREATE TABLE defect
+(
+	DefectID INTEGER PRIMARY KEY,
+	SectorID INTEGER,
+	PosX NUMERIC,
+	PosY NUMERIC,
+	Radius INTEGER,
+	Com VARCHAR
+);
+
+CREATE TABLE door
+(
+	DoorID INTEGER PRIMARY KEY,
+	SectorID INTEGER,
+	PosX NUMERIC,
+	PosY NUMERIC,
+	Hoehe NUMERIC,
+	Breite NUMERIC
+);
+
+ALTER TABLE barrier ADD CONSTRAINT fk_barrier_sector
+	FOREIGN KEY (SectorID) REFERENCES SECTOR (SectorID); 
+	
+ALTER TABLE foundation ADD CONSTRAINT fk_foundation_sector
+	FOREIGN KEY (SectorID) REFERENCES SECTOR (SectorID); 
+	
+ALTER TABLE defect ADD CONSTRAINT fk_defect_sector
+	FOREIGN KEY (SectorID) REFERENCES SECTOR (SectorID);
+	
+ALTER TABLE door ADD CONSTRAINT fk_door_sector
+	FOREIGN KEY (SectorID) REFERENCES SECTOR (SectorID); 
