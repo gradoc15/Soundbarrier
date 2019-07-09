@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import java.awt.image.RescaleOp;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,15 +43,14 @@ public class SoundBarrierGui extends javax.swing.JFrame
     private int mode = 0;
     private int multiplicator = 20;
     private int border = 5;
-    private ArrayList<parts.WallComponent> data = new ArrayList();
+    private LinkedList<parts.WallComponent> data = new LinkedList();
     
-    private ArrayList<parts.WallComponent> selectedObjects = new ArrayList();
+    private LinkedList<parts.WallComponent> selectedObjects = new LinkedList();
  
     
     //vars for dragging
     private boolean dragAble = false;
     private parts.Selektor selektor;
-    private parts.Selektor defectText;
     private LinkedList<Double> oldX = new LinkedList();
     private LinkedList<Double> oldY = new LinkedList();
     private double oldXMouse;

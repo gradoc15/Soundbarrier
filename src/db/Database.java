@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,7 +43,7 @@ public class Database {
      * @param data sind die zuspeichernden Daten
      * @throws SQLException 
      */ 
-    public void save(int sector, ArrayList<parts.WallComponent> data) throws SQLException
+    public void save(int sector, LinkedList<parts.WallComponent> data) throws SQLException
     {
         Statement st = con.createStatement();
         PreparedStatement actorInsertStmt;
@@ -63,7 +63,7 @@ public class Database {
         saveDefects(sector, data);
     }
     
-    private void saveBarriers(int sector, ArrayList<parts.WallComponent> data) throws SQLException
+    private void saveBarriers(int sector, LinkedList<parts.WallComponent> data) throws SQLException
     {
         Statement st = con.createStatement();
         PreparedStatement actorInsertStmt;
@@ -92,7 +92,7 @@ public class Database {
         }
     }
     
-    private void saveFoundations(int sector, ArrayList<parts.WallComponent> data) throws SQLException
+    private void saveFoundations(int sector, LinkedList<parts.WallComponent> data) throws SQLException
     {
         Statement st = con.createStatement();
         PreparedStatement actorInsertStmt;
@@ -121,7 +121,7 @@ public class Database {
         }
     }
     
-    private void saveDoors(int sector, ArrayList<parts.WallComponent> data) throws SQLException
+    private void saveDoors(int sector, LinkedList<parts.WallComponent> data) throws SQLException
     {
         Statement st = con.createStatement();
         PreparedStatement actorInsertStmt;
@@ -150,7 +150,7 @@ public class Database {
         }
     }
     
-    private void saveDefects(int sector, ArrayList<parts.WallComponent> data) throws SQLException
+    private void saveDefects(int sector, LinkedList<parts.WallComponent> data) throws SQLException
     {
         Statement st = con.createStatement();
         PreparedStatement actorInsertStmt;

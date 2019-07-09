@@ -15,24 +15,12 @@
             <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/gui/SoundBarrierGui.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/data/Material.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/gui/ModifyFoundationDialog.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/Barrier.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/guiNew/Soundbarrier.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/gui/ModifyDefectDialog.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/Foundation.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/Rect.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/db/Database.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/gui/ModifyBarrierDialog.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/guiNew/CreateComponent.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/old/CreateDialog.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/Door.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/gui/EditSectorDialog.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/db/create-db</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/data/Components.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/WallComponent.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/Defect.java</file>
-            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Laermschutzwand/src/parts/Selektor.java</file>
+            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Soundbarrier/src/gui/SoundBarrierGui.java</file>
+            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Soundbarrier/src/db/Database.java</file>
+            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Soundbarrier/src/db/create-db</file>
+            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Soundbarrier/src/guiNew/CreateComponent.java</file>
+            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Soundbarrier/src/guiNew/Soundbarrier.java</file>
+            <file>file:/C:/Users/User/Documents/Schule/Praktikum/3-Jahrgang/Soundbarrier/src/gui/main.java</file>
         </group>
     </open-files>
 </project-private>
