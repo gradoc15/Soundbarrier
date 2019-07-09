@@ -692,8 +692,8 @@ public class Soundbarrier extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_onMiImport
         try{
             JFileChooser chooser = new JFileChooser();
-            FileFilter filter = new FileNameExtensionFilter("Only .csv", "csv");
-            chooser.setAcceptAllFileFilterUsed(true);
+            FileFilter filter = new FileNameExtensionFilter(".csv", "csv");
+            chooser.setAcceptAllFileFilterUsed(false);
             chooser.setFileFilter(filter);
             int ret = chooser.showOpenDialog(null);
             if(ret == JFileChooser.APPROVE_OPTION)
