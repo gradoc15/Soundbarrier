@@ -3,7 +3,7 @@ DROP TABLE foundation;
 DROP TABLE defect;
 DROP TABLE door;
 DROP TABLE sector;
-DROP TABLE barrier;
+DROP TABLE barrier_import;
 
 CREATE TABLE sector
 (
@@ -54,7 +54,7 @@ CREATE TABLE door
 
 CREATE TABLE barrier_import
 (
-        Obj_ID VARCHAR PRIMARY KEY,
+        ObjID VARCHAR PRIMARY KEY,
         Klasse VARCHAR,
         Konstruktion VARCHAR,
         ObjNummer INTEGER,
@@ -72,11 +72,11 @@ CREATE TABLE barrier_import
         StandortA VARCHAR,
         StandortB VARCHAR,
         Prefix VARCHAR,
-        Ü/S VARCHAR,
-        HauptverkehrslinieNR INTEGER,
+        ÜS VARCHAR,
+        HauptverkehrslinieNR VARCHAR,
         HauptverkehrslinieNA VARCHAR,
         KmVonBei NUMERIC,
-        kmBis NUMERIC,
+        KmBis NUMERIC,
         Funktion VARCHAR,
         Position VARCHAR,
         Fahrbahnanlage VARCHAR,
@@ -88,7 +88,7 @@ CREATE TABLE barrier_import
         AnfangRechtswert NUMERIC,
         AnfangNordwert NUMERIC,
         AnfangHöhe NUMERIC,
-        KrezungspunktRechtswert NUMERIC,
+        KreuzungspunktRechtswert NUMERIC,
         KreuzungspunktNordwert NUMERIC,
         KreuzungspunktHöhe NUMERIC,
         EndpunktRechtswert NUMERIC,
@@ -113,7 +113,7 @@ CREATE TABLE barrier_import
         KonstruktionBefestigung VARCHAR,
         KonstruktionAnsichtsflaeche NUMERIC,
         KonstruktionNachträglicheErhöhung BOOLEAN,
-        KonstruktionHMAX NUMERIC,
+        KonstruktionHMAX BOOLEAN,
         KonstruktionAuskragung BOOLEAN,
         KonstruktionGesamtlaengeAuskragung NUMERIC,
         KonstruktionMaximaleAuskragung NUMERIC,
@@ -140,7 +140,7 @@ CREATE TABLE barrier_import
         KErgänzendeUntersuchung VARCHAR,
         UNTB BOOLEAN,
         KONS BOOLEAN,
-        AUSR BOOLEAN,
+        AUSR BOOLEAN
 );
 
 ALTER TABLE barrier ADD CONSTRAINT fk_barrier_sector

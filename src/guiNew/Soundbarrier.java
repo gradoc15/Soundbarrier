@@ -6,6 +6,8 @@
 package guiNew;
 
 import data.Components;
+import gui.BarrierTable;
+import gui.BarrierTableVisibleColumns;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -95,6 +97,7 @@ public class Soundbarrier extends javax.swing.JFrame {
         miLoad = new javax.swing.JMenuItem();
         miNew = new javax.swing.JMenuItem();
         miImport = new javax.swing.JMenuItem();
+        miAnzeige = new javax.swing.JMenuItem();
         muView = new javax.swing.JMenu();
         muEdit = new javax.swing.JMenu();
         miChangeSector = new javax.swing.JMenuItem();
@@ -332,6 +335,16 @@ public class Soundbarrier extends javax.swing.JFrame {
             }
         });
         muData.add(miImport);
+
+        miAnzeige.setText("Lärmschutzwände anzeigen");
+        miAnzeige.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                miAnzeigeActionPerformed(evt);
+            }
+        });
+        muData.add(miAnzeige);
 
         mbMenue.add(muData);
 
@@ -715,6 +728,18 @@ public class Soundbarrier extends javax.swing.JFrame {
             sqlex.printStackTrace();
         }
     }//GEN-LAST:event_onMiImport
+
+    public static void showJOptionPaneMessageInformation(String message)
+    {
+        JOptionPane.showMessageDialog(null, message, "", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void miAnzeigeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_miAnzeigeActionPerformed
+    {//GEN-HEADEREND:event_miAnzeigeActionPerformed
+        BarrierTable table = BarrierTable.getInstance();
+        table.getModel().setColumnNames();
+        
+    }//GEN-LAST:event_miAnzeigeActionPerformed
 
     private double calcPxToCoordsX(int xCoord)
     {
@@ -1546,6 +1571,7 @@ public class Soundbarrier extends javax.swing.JFrame {
     private javax.swing.JLabel lbMove;
     private javax.swing.JLabel lbSelect;
     private javax.swing.JMenuBar mbMenue;
+    private javax.swing.JMenuItem miAnzeige;
     private javax.swing.JMenuItem miChangeSector;
     private javax.swing.JMenuItem miCopySector;
     private javax.swing.JMenuItem miDelSector;

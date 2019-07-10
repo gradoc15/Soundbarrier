@@ -113,7 +113,7 @@ CREATE TABLE barrier_import
         KonstruktionBefestigung VARCHAR,
         KonstruktionAnsichtsflaeche NUMERIC,
         KonstruktionNachträglicheErhöhung BOOLEAN,
-        KonstruktionHMAX NUMERIC,
+        KonstruktionHMAX BOOLEAN,
         KonstruktionAuskragung BOOLEAN,
         KonstruktionGesamtlaengeAuskragung NUMERIC,
         KonstruktionMaximaleAuskragung NUMERIC,
